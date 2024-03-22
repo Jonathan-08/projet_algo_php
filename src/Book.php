@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Algo\Data;
+namespace App\Algo;
 
 class Book{
     public string $name;

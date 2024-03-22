@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Algo\Data\Heap;
+namespace App\Algo\Heap;
 
-use App\Algo\Data\LinkedList;
+use App\Algo\LinkedList;
 
 class Heap extends LinkedList{
     public function pop(): mixed

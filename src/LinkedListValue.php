@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Algo\Data;
+namespace App\Algo;
 
-use App\Algo\Data\Book;
+use App\Algo\Book;
 class LinkedListValue
 {
     public Book $value;
