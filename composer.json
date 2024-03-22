@@ -1,0 +1,16 @@
+{
+    "name": "app/algo",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\Algo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jonathan Assi",
+            "email": "assijonathan2@gmail.com"
+        }
+    ],
+    "require": {}
+}
