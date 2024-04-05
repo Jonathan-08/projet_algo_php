@@ -6,13 +6,17 @@ class Book{
     public string $name;
     public string $description;
     public bool $available;
-    public string $id;
+    public int $id;
 
     public function __construct($name, $description, $available)
     {
         $this->name = $name;
         $this->description = $description;
         $this->available = $available;
-        $this->id = bin2hex(random_bytes(4));
+        $this->id = 0;
+    }
+
+    public function setId(int $value): void{
+        $this->id = $value;
     }
 }

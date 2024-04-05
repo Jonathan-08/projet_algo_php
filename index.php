@@ -11,7 +11,7 @@ function showMenu(){
     $bookCollection = new Heap();
     $choice = 0;
     while($choice != -1){
-        echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n";
+        echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n-1/Quitter\n";
         $choice = intval(readline());
         switch($choice){
             case 1:
@@ -22,9 +22,11 @@ function showMenu(){
                 $bookDescription = readline();
                 echo "\nEntrez la disponibilité du livre (0 = indisponible 1 = disponible): ";
                 $bookAvailability = intval(readline());
-        
-                $bookCollection->push(new Book($bookName,$bookDescription,$bookAvailability));
-                var_dump($bookCollection);
+                $book = new Book($bookName,$bookDescription,$bookAvailability);
+                $book->setId($bookCollection->getLength() + 1);
+                $bookCollection->push($book);
+                // var_dump($bookCollection);
+                echo "le livre $book->name a été ajouté avec succès.\n";
                 break;
             case 2:
                 echo "Vous avez choisi 'Modifier un livre'\n";

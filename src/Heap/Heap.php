@@ -24,4 +24,20 @@ class Heap extends LinkedList{
 
         return $first->value;
     }
+
+    public function getLength(): int{
+        
+        if($this->first === null){
+            return 0;
+        }
+
+        $count = 0;
+
+        while($this->first !== null){
+            $count++;
+            $this->first = $this->first->next;
+        }
+
+        return $count;
+    }
 }
