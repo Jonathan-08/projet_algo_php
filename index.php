@@ -36,6 +36,12 @@ function showMenu(){
                 echo "Vous avez choisi 'Afficher les livres'\n";
                 var_dump($bookCollection);
                 break;
+            case -1:
+                echo "Au revoir! ;)";
+                break;
+            default:
+                echo "Choix erroné. Entreé un chiffre parmis ceux proposés\n";
+                break;
         }
     }
 }
