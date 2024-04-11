@@ -4,6 +4,7 @@ namespace App\Algo\Heap;
 
 use App\Algo\LinkedList;
 use App\Algo\Book;
+use App\Algo\LinkedListValue;
 
 class Heap extends LinkedList{
 
@@ -39,19 +40,15 @@ class Heap extends LinkedList{
         return $first->value;
     }
 
-    public function getLength(): int{
-        
-        if($this->first === null){
-            return 0;
-        }
-
+    public function getLength(): int {
         $count = 0;
-
-        while($this->first !== null){
+        $current = $this->first; 
+    
+        while ($current !== null) {
             $count++;
-            $this->first = $this->first->next;
+            $current = $current->next;
         }
-
+    
         return $count;
     }
 

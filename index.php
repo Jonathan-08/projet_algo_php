@@ -27,6 +27,7 @@ function writeBooksToJson(array $livres, string $filename): void {
 
 function showMenu()
 {
+    $filename = "data/livres.json";
     $bookCollection = new Heap();
     $choice = 0;
     while ($choice != -1) {
@@ -44,9 +45,7 @@ function showMenu()
                 $book = new Book($bookName, $bookDescription, $bookAvailability);
                 $book->setId($bookCollection->getLength() + 1);
                 $bookCollection->push($book);
-                // var_dump($bookCollection);
-                echo "le livre $book->name a été ajouté avec succès.\n";
-                $filename = "data/livres.json";
+                echo "Le livre $book->name a été ajouté avec succès.\n";
                 writeBooksToJson($bookCollection->toArray(), $filename);
                 break;
             case 2:
