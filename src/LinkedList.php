@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Algo\Data;
-use App\Algo\Data\LinkedListValue;
+namespace App\Algo;
+use App\Algo\LinkedListValue;
 
 class LinkedList
 {
@@ -14,7 +14,7 @@ class LinkedList
         }
     }
 
-    public function push($value)
+    public function push(Book $value)
     {
         if ($this->first === null) {
             $this->first = new LinkedListValue($value);

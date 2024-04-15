@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Algo\Data;
+namespace App\Algo;
 
+use App\Algo\Book;
 class LinkedListValue
 {
-    public $value;
+    public Book $value;
     public $next;
 
-    public function __construct($value)
+    public function __construct(Book $value)
     {
         $this->value = $value;
         $this->next = null;
