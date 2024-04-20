@@ -6,6 +6,7 @@ require_once "vendor/autoload.php";
 
 use App\Algo\Heap\Heap;
 use App\Algo\Book;
+use App\Algo\Utils;
 
 function readBooksFromJson(string $filename): array {
     
@@ -29,6 +30,7 @@ function showMenu()
 {
     $filename = "data/livres.json";
     $bookCollection = new Heap();
+    Utils::fill($bookCollection, $filename);
     $choice = 0;
     while ($choice != -1) {
         echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n-1/Quitter\n";
@@ -50,6 +52,11 @@ function showMenu()
                 break;
             case 2:
                 echo "Vous avez choisi 'Modifier un livre'\n";
+                echo "Entrez l'identifiant du livre à modifier: ";
+                $bookID = intval(readline());
+                $bookToModif = $bookCollection->findByKey($bookID);
+                $bookCollection->showSingleBook($bookToModif);
+                $bookCollection->modifBook($bookToModif);
                 break;
             case 3:
 
@@ -68,13 +75,13 @@ function showMenu()
                 break;
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
-                var_dump($bookCollection);
+                $bookCollection->showAllBooks();
                 break;
             case -1:
                 echo "Au revoir! ;)";
                 break;
             default:
-                echo "Choix erroné. Entreé un chiffre parmis ceux proposés\n";
+                echo "Choix erroné. Entrz un chiffre parmis ceux proposés.\n";
                 break;
         }
     }

@@ -86,4 +86,34 @@ class Heap extends LinkedList{
     
         return null;
     }
+
+    public function showSingleBook($bookValue): void{
+        $bookAvailable = $bookValue->available ? "Disponible" : "Indisponible";
+        echo "Nom du livre: $bookValue->name\nDescription: $bookValue->description\nDisponibilité: $bookAvailable\n";
+    }
+
+    public function showAllBooks(): void{
+        $current = $this->first;
+
+        if($this->first === null){
+            echo "La bibliothèque est vide\n";
+        }
+
+        while($current !== null){
+            $bookAvailable = $current->value->available ? "Disponible" : "Indisponible";
+            echo "Nom du livre: {$current->value->name}\nDescription: {$current->value->description}\nDisponibilité: {$bookAvailable}\n\n";
+            $current = $current->next;
+        }
+    }
+
+    public function modifBook($bookValue): void{
+        echo "Nouveau nom: ";
+        $bookValue->name = readline();
+        echo "Nouvelle description nom: ";
+        $bookValue->description = readline();
+        echo "Nouvelle disponibilité: ";
+        $bookValue->available = intval(readline());
+    }
+
+    
 }
