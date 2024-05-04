@@ -51,20 +51,13 @@ function showMenu()
                 writeBooksToJson($bookCollection->toArray(), $filename);
                 break;
             case 2:
-                    echo "Vous avez choisi 'Modifier un livre'\n";
-                    echo "Entrez l'identifiant du livre à modifier: ";
-                    $bookID = intval(readline());
-                    $bookToModif = $bookCollection->findByKey($bookID);
-                
-                    if ($bookToModif !== null) {
-                        $bookCollection->showSingleBook($bookToModif);
-                        $bookCollection->modifBook($bookToModif);
-                        writeBooksToJson($bookCollection->toArray(), $filename);
-                        echo "Les modifications ont été enregistrées avec succès.\n";
-                    } else {
-                        echo "Aucun livre trouvé avec cet identifiant.\n";
-                    }
-                    break;
+                echo "Vous avez choisi 'Modifier un livre'\n";
+                echo "Entrez l'identifiant du livre à modifier: ";
+                $bookID = intval(readline());
+                $bookToModif = $bookCollection->findByKey($bookID);
+                $bookCollection->showSingleBook($bookToModif);
+                $bookCollection->modifBook($bookToModif);
+                break;
             case 3:
 
                 echo "Vous avez choisi 'Supprimer un livre'\n";
