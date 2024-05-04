@@ -1,20 +1,8 @@
 [
     {
-        "name": "Test",
-        "description": "testtest",
+        "name": "Nike",
+        "description": "nike",
         "available": true,
-        "id": 0
-    },
-    {
-        "name": "test2",
-        "description": "testestest",
-        "available": false,
-        "id": 0
-    },
-    {
-        "name": "test3",
-        "description": "testest",
-        "available": true,
-        "id": 3
+        "id": 1
     }
 ]
