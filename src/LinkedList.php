@@ -5,7 +5,9 @@ use App\Algo\LinkedListValue;
 
 class LinkedList
 {
+    public $nextId = 1;
     public $first;
+
 
     public function __construct($value = null)
     {
@@ -15,18 +17,26 @@ class LinkedList
     }
 
     public function push(Book $value)
-    {
-        if ($this->first === null) {
-            $this->first = new LinkedListValue($value);
-            return;
-        }
-
-        $item = $this->first;
-
-        while ($item->next !== null) {
-            $item = $item->next;
-        }
-
-        $item->next = new LinkedListValue($value);
+{
+    if ($this->first === null) {
+        $this->first = new LinkedListValue($value);
+        $value->id = $value->id ?? $this->nextId++;
+        return;
     }
+
+    $item = $this->first;
+
+    while ($item->next !== null) {
+        $item = $item->next;
+    }
+
+    $item->next = new LinkedListValue($value);
+
+    
+
+}
+
+    
+
+    
 }
