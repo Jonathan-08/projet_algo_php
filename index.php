@@ -4,7 +4,7 @@ namespace App\Algo;
 
 require_once "vendor/autoload.php";
 
-use App\Algo\Heap\Heap;
+use App\Algo\BookCollection;
 use App\Algo\Book;
 use App\Algo\Utils;
 
@@ -13,12 +13,16 @@ function writeBooksToJson(array $livres, string $filename): void {
     file_put_contents($filename, $jsonData);
 }
 
-
+// $filename = "data/livres.json";
+// $bookCollection = new BookCollection();
+// Utils::fill($bookCollection, $filename);
+// $result = $bookCollection->findById(6);
+// var_dump($result);
 
 function showMenu()
 {
     $filename = "data/livres.json";
-    $bookCollection = new Heap();
+    $bookCollection = new BookCollection();
     Utils::fill($bookCollection, $filename);
 
     //var_dump($bookCollection);
@@ -43,33 +47,31 @@ function showMenu()
                 $bookCollection->push($book);
                 echo "Le livre $book->name a été ajouté avec succès.\n";
                 writeBooksToJson($bookCollection->toArray(), $filename);
-                break;/*
-                case 2:
-                    echo "Vous avez choisi 'Modifier un livre'\n";
-                    echo "Entrez l'identifiant du livre à modifier: ";
-                    $bookID = intval(readline());
-                    
-
-
-                    break;
-
-                        
-             */   
-            case 3:
-
-                echo "Vous avez choisi 'Supprimer un livre'\n";
-                echo "Entrez le nom, la description, la disponibilité ou l'identifiant du livre que vous souhaitez supprimer : ";
-                $searchKey = readline();
-                $bookToRemove = $bookCollection->findByKey($searchKey);
-                if ($bookToRemove !== null) {
-                    $bookCollection->remove($bookToRemove);
-                    echo "Le livre a été supprimé avec succès.\n";
-                } else {
-                    echo "Aucun livre correspondant n'a été trouvé.\n";
-                }
-                $filename = "data/livres.json";
+                break;
+            case 2:
+                echo "Vous avez choisi 'Modifier un livre'\n";
+                echo "Entrez l'identifiant du livre à modifier: ";
+                $bookID = intval(readline());
+                $bookToModif = $bookCollection->findById($bookID);
+                $bookCollection->showSingleBook($bookToModif);
+                $bookCollection->modifBook($bookToModif);
                 writeBooksToJson($bookCollection->toArray(), $filename);
                 break;
+            // case 3:
+
+            //     echo "Vous avez choisi 'Supprimer un livre'\n";
+            //     echo "Entrez le nom, la description, la disponibilité ou l'identifiant du livre que vous souhaitez supprimer : ";
+            //     $searchKey = readline();
+            //     $bookToRemove = $bookCollection->findById($searchKey);
+            //     if ($bookToRemove !== null) {
+            //         $bookCollection->remove($bookToRemove);
+            //         echo "Le livre a été supprimé avec succès.\n";
+            //     } else {
+            //         echo "Aucun livre correspondant n'a été trouvé.\n";
+            //     }
+            //     $filename = "data/livres.json";
+            //     writeBooksToJson($bookCollection->toArray(), $filename);
+            //     break;
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
                 $bookCollection->showAllBooks();
