@@ -1,0 +1,44 @@
+[
+    {
+        "name": "test",
+        "description": "test",
+        "available": false,
+        "id": 1
+    },
+    {
+        "name": "test2",
+        "description": "test2",
+        "available": true,
+        "id": 2
+    },
+    {
+        "name": "test3",
+        "description": "test3",
+        "available": true,
+        "id": 3
+    },
+    {
+        "name": "test4",
+        "description": "test4",
+        "available": true,
+        "id": 4
+    },
+    {
+        "name": "test5",
+        "description": "test5",
+        "available": true,
+        "id": 5
+    },
+    {
+        "name": "test6",
+        "description": "test6",
+        "available": true,
+        "id": 6
+    },
+    {
+        "name": "test7",
+        "description": "test7",
+        "available": false,
+        "id": 7
+    }
+]
