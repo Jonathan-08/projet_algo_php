@@ -8,6 +8,13 @@ use App\Algo\Heap\Heap;
 use App\Algo\Book;
 use App\Algo\Utils;
 
+/* TODO
+
+empêcher l'écrasement de la bibliothèque (case 1)
+regarder la fonction findByKey()
+
+
+*/
 function readBooksFromJson(string $filename): array {
     
     if (!file_exists($filename)) {
@@ -21,8 +28,6 @@ function writeBooksToJson(array $livres, string $filename): void {
     $jsonData = json_encode($livres, JSON_PRETTY_PRINT);
     file_put_contents($filename, $jsonData);
 }
-
-
 
 
 

@@ -8,12 +8,12 @@ class Book{
     public bool $available;
     public int $id;
 
-    public function __construct($name, $description, $available)
+    public function __construct($name, $description, $available, $id = 0)
     {
         $this->name = $name;
         $this->description = $description;
         $this->available = $available;
-        $this->id = 0;
+        $this->id = $id;
     }
 
     public function setId(int $value): void{
