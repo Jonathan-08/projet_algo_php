@@ -8,7 +8,7 @@ class Book{
     public bool $available;
     public int $id;
 
-    public function __construct($name, $description, $available, $id) 
+    public function __construct($name, $description, $available, $id = 0)
     {
         $this->name = $name;
         $this->description = $description;

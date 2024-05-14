@@ -21,7 +21,7 @@ class Utils{
                 $fetchedBook["id"] 
             );
             $bookCollection->push($book);
-        }
     }
     
+    }
 }

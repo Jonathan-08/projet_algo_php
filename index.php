@@ -8,15 +8,10 @@ use App\Algo\Heap\Heap;
 use App\Algo\Book;
 use App\Algo\Utils;
 
-
-
-
 function writeBooksToJson(array $livres, string $filename): void {
     $jsonData = json_encode($livres, JSON_PRETTY_PRINT);
     file_put_contents($filename, $jsonData);
 }
-
-
 
 
 
