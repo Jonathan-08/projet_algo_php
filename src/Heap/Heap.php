@@ -87,6 +87,13 @@ class Heap extends LinkedList{
         return null;
     }
 
+    public function findById(int $searchId): ?Book {
+        
+        $id = $this->findByKey($searchId);
+        return $id !== null ? $id : null;
+    }
+    
+
     public function showSingleBook($bookValue): void{
         $bookAvailable = $bookValue->available ? "Disponible" : "Indisponible";
         echo "Nom du livre: $bookValue->name\nDescription: $bookValue->description\nDisponibilité: $bookAvailable\n";
@@ -94,26 +101,58 @@ class Heap extends LinkedList{
 
     public function showAllBooks(): void{
         $current = $this->first;
-
+    
         if($this->first === null){
             echo "La bibliothèque est vide\n";
         }
-
+    
         while($current !== null){
-            $bookAvailable = $current->value->available ? "Disponible" : "Indisponible";
-            echo "Nom du livre: {$current->value->name}\nDescription: {$current->value->description}\nDisponibilité: {$bookAvailable}\n\n";
+            echo "Titre du Livre : ".$current->value->name."\n";
+            echo "Description : ".$current->value->description."\n";
+            echo "".$current->value->id."\n";
+            if($current->value->available == 0){
+                echo "Indisponible\n";
+            }else{
+                echo "Disponible\n";
+            }
+            echo "\n";
+    
             $current = $current->next;
         }
     }
+    
 
-    public function modifBook($bookValue): void{
-        echo "Nouveau nom: ";
-        $bookValue->name = readline();
-        echo "Nouvelle description nom: ";
-        $bookValue->description = readline();
-        echo "Nouvelle disponibilité: ";
-        $bookValue->available = intval(readline());
+    
+
+    public function modifBook(Book $bookValue): void {
+        
+        // on va deja afficher le livre à modifier
+        $bookAvailable = $bookValue->available ? "Disponible" : "Indisponible";
+        echo "Nom du livre: $bookValue->name\nDescription: $bookValue->description\nDisponibilité: $bookAvailable\n";
+        $current = $current->next;
+        while($current !== null){
+            echo "".$current->value->name."";
+
+            echo "".$current->value->description."";
+    
+            if($current->value->available == 0){
+        
+                echo "Indisponible\n";
+
+            }else{
+                echo "Disponible\n";
+
+            }
+        }
+        echo "\n";
+        
+        
+    
     }
+    
+    
+    
+    
 
     
 }
