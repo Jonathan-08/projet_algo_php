@@ -8,10 +8,7 @@ use App\Algo\Heap\Heap;
 use App\Algo\Book;
 use App\Algo\Utils;
 
-function readBooksFromJson(string $filename): array {
-  
 
-}
 
 
 function writeBooksToJson(array $livres, string $filename): void {
