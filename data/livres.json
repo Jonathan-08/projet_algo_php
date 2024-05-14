@@ -34,5 +34,11 @@
         "description": "test6",
         "available": true,
         "id": 6
+    },
+    {
+        "name": "test7",
+        "description": "test7",
+        "available": false,
+        "id": 7
     }
 ]
