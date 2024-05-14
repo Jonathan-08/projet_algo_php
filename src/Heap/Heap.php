@@ -109,6 +109,7 @@ class Heap extends LinkedList{
         while($current !== null){
             echo "Titre du Livre : ".$current->value->name."\n";
             echo "Description : ".$current->value->description."\n";
+            echo "".$current->value->id."\n";
             if($current->value->available == 0){
                 echo "Indisponible\n";
             }else{

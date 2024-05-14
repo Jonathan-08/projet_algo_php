@@ -29,8 +29,8 @@ function showMenu()
     $bookCollection = new Heap();
     Utils::fill($bookCollection, $filename);
 
-    var_dump($bookCollection);
-  /*
+    //var_dump($bookCollection);
+  
 
 
     $choice = 0;
@@ -51,7 +51,7 @@ function showMenu()
                 $bookCollection->push($book);
                 echo "Le livre $book->name a été ajouté avec succès.\n";
                 writeBooksToJson($bookCollection->toArray(), $filename);
-                break;
+                break;/*
                 case 2:
                     echo "Vous avez choisi 'Modifier un livre'\n";
                     echo "Entrez l'identifiant du livre à modifier: ";
@@ -62,7 +62,7 @@ function showMenu()
                     break;
 
                         
-                
+             */   
             case 3:
 
                 echo "Vous avez choisi 'Supprimer un livre'\n";
@@ -81,6 +81,7 @@ function showMenu()
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
                 $bookCollection->showAllBooks();
+
               
 
 
@@ -92,7 +93,7 @@ function showMenu()
                 echo "Choix erroné. Entrz un chiffre parmis ceux proposés.\n";
                 break;
                 }
-        }*/
+        }
 }
 
 showMenu();
