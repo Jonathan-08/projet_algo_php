@@ -7,6 +7,7 @@ require_once "vendor/autoload.php";
 use App\Algo\BookCollection;
 use App\Algo\Book;
 use App\Algo\Utils;
+use App\Algo\Logger;
 
 
 function writeBooksToJson(array $livres, string $filename): void {
@@ -14,11 +15,6 @@ function writeBooksToJson(array $livres, string $filename): void {
     file_put_contents($filename, $jsonData);
 }
 
-// $filename = "data/livres.json";
-// $bookCollection = new BookCollection();
-// Utils::fill($bookCollection, $filename);
-// $result = $bookCollection->findById(6);
-// var_dump($result);
 
 function showMenu()
 {
@@ -28,7 +24,8 @@ function showMenu()
 
     //var_dump($bookCollection);
   
-
+    $logFile = "data/log.csv"; 
+    $logger = new Logger($logFile);
 
     $choice = 0;
     while ($choice != -1) {
@@ -48,6 +45,9 @@ function showMenu()
                 $bookCollection->push($book);
                 echo "Le livre $book->name a été ajouté avec succès.\n";
                 writeBooksToJson($bookCollection->toArray(), $filename);
+
+                $logger->logBookAddition($bookName);
+
                 break;
             case 2:
                 echo "Vous avez choisi 'Modifier un livre'\n";
@@ -57,6 +57,15 @@ function showMenu()
                 $bookCollection->showSingleBook($bookToModif);
                 $bookCollection->modifBook($bookToModif);
                 writeBooksToJson($bookCollection->toArray(), $filename);
+
+
+                // recupérer le nom du livre modifié
+                $bookName = $bookToModif;
+                
+
+
+                $logger->logBookModification($bookName);
+
                 break;
             case 3:
 
@@ -69,16 +78,15 @@ function showMenu()
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
                 $bookCollection->showAllBooks();
-
-              
-
-
+                $logger->logSeeBooks();
                 break;
             case 5:
                 echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
                 $bookId = intval(readline());
                 $book = $bookCollection->findById($bookId);
                 $bookCollection->showSingleBook($book);
+
+                $logger->logSeeOneBooks();
                 break;
             case 5:
                 echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
