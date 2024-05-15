@@ -16,7 +16,7 @@ class Logger {
     }
 
     public function logBookAddition($bookName) {
-        $this->log("Ajout d'un livre : $bookName". date('l jS \of F Y h:i:s A'));
+        $this->log("Ajout d'un livre : $bookName ". "le :". date('l jS \of F Y h:i:s A'));
     }
 
     public function logBookModification($bookName) {
@@ -31,6 +31,7 @@ class Logger {
     }
     public function logSeeOneBooks($bookName) {
         $this->log("Affichage d'un livre : $bookName");
+        
     }
     
 }

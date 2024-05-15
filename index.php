@@ -60,16 +60,16 @@ function showMenu()
 
 
                 // recupérer le nom du livre modifié
-                $bookName = $bookToModif;
+                $bookName = $bookToModif->value->name;
                 
 
 
                 $logger->logBookModification($bookName);
 
                 break;
-            // case 3:
+            case 3:
 
-            //     echo "Vous avez choisi 'Supprimer un livre'\n";
+                echo "Vous avez choisi 'Supprimer un livre'\n";
             //     echo "Entrez le nom, la description, la disponibilité ou l'identifiant du livre que vous souhaitez supprimer : ";
             //     $searchKey = readline();
             //     $bookToRemove = $bookCollection->findById($searchKey);
@@ -81,31 +81,31 @@ function showMenu()
             //     }
             //     $filename = "data/livres.json";
             //     writeBooksToJson($bookCollection->toArray(), $filename);
-            //     break;
+            echo "pour l'instant cette fonctionnalité n'est pas disponible\n";
+            $bookName = "bookName";
+            $logger->logBookDeletion($bookName);
+                break;
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
                 $bookCollection->showAllBooks();
+
                 $logger->logSeeBooks();
                 break;
             case 5:
                 echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
                 $bookId = intval(readline());
                 $book = $bookCollection->findById($bookId);
-                $bookCollection->showSingleBook($book);
 
-                $logger->logSeeOneBooks();
-                break;
-            case 5:
-                echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
-                $bookId = intval(readline());
-                $book = $bookCollection->findById($bookId);
-                $bookCollection->showSingleBook($book);
+                $bookName = $book->value->name;
+
+
+                $logger->logSeeOneBooks($bookName);
                 break;
             case -1:
                 echo "Au revoir! ;)";
                 break;
             default:
-                echo "Choix erroné. Entrz un chiffre parmis ceux proposés.\n";
+                echo "Choix erroné. Entrez un chiffre parmis ceux proposés.\n";
                 break;
                 }
         }
