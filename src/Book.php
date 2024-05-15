@@ -16,4 +16,9 @@ class Book{
         $this->id = $id;
     }
 
+    public function getName ()
+    {
+        return $this->name;
+    }
+
 }

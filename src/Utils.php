@@ -9,6 +9,9 @@ use App\Algo\Book;
  */
 
 class Utils{
+
+    
+
     static function fetchBooksFromFile($filename){
         if(file_exists($filename)){
             $json_data = file_get_contents($filename);
@@ -30,8 +33,6 @@ class Utils{
                 $fetchedBook["id"]);
                 $bookCollection->push($book);
             }
-        } else {
-            die("Le fichier: $filename est vide.");
-        }
+        } 
     }
 }

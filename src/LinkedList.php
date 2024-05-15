@@ -5,7 +5,6 @@ use App\Algo\LinkedListValue;
 
 class LinkedList
 {
-    public $nextId = 1;
     public $first;
 
 
@@ -20,7 +19,7 @@ class LinkedList
 {
     if ($this->first === null) {
         $this->first = new LinkedListValue($value);
-        $value->id = $value->id ?? $this->nextId++;
+        
         return;
     }
 
