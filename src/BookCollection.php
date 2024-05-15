@@ -71,6 +71,10 @@ class BookCollection extends Heap{
         return null;
     }
 
+    /**
+     * Trouve un livre en fonction de son Id.
+     * Retourne null si l'id n'est pas trouvé
+     */
     public function findById(int $id): LinkedListValue | null{
         $current = $this->first;
 
@@ -90,6 +94,9 @@ class BookCollection extends Heap{
         echo "Nom du livre: {$bookValue->value->name}\nDescription: {$bookValue->value->description}\nDisponibilité: $bookAvailable\n";
     }
 
+    /**
+     * Affiche tout les livres de la bibliothèque
+     */
     public function showAllBooks(): void{
         $current = $this->first;
 
@@ -104,6 +111,9 @@ class BookCollection extends Heap{
         }
     }
 
+    /**
+     * Modifie un livre de la bibliothèque
+     */
     public function modifBook(LinkedListValue $bookValue): void{
         echo "Nouveau nom: ";
         $bookValue->value->name = readline();
