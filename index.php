@@ -60,7 +60,7 @@ function showMenu()
 
 
                 // recupérer le nom du livre modifié
-                $bookName = $bookToModif;
+                $bookName = $bookToModif->value->name;
                 
 
 
@@ -74,31 +74,29 @@ function showMenu()
                 $searchKey = readline();
                 $bookCollection->remove($searchKey);
                 writeBooksToJson($bookCollection->toArray(), $filename);
+            $logger->logBookDeletion($filename);
                 break;
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
                 $bookCollection->showAllBooks();
+
                 $logger->logSeeBooks();
                 break;
             case 5:
                 echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
                 $bookId = intval(readline());
                 $book = $bookCollection->findById($bookId);
-                $bookCollection->showSingleBook($book);
 
-                $logger->logSeeOneBooks();
-                break;
-            case 5:
-                echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
-                $bookId = intval(readline());
-                $book = $bookCollection->findById($bookId);
-                $bookCollection->showSingleBook($book);
+                $bookName = $book->value->name;
+
+
+                $logger->logSeeOneBooks($bookName);
                 break;
             case -1:
                 echo "Au revoir! ;)";
                 break;
             default:
-                echo "Choix erroné. Entrz un chiffre parmis ceux proposés.\n";
+                echo "Choix erroné. Entrez un chiffre parmis ceux proposés.\n";
                 break;
                 }
         }
