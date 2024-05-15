@@ -1,20 +1,20 @@
 [
     {
-        "name": "test",
-        "description": "test",
-        "available": false,
+        "name": "test1",
+        "description": "test1",
+        "available": true,
         "id": 1
     },
     {
-        "name": "test2",
-        "description": "test2",
-        "available": true,
+        "name": "TEST2",
+        "description": "TEST2",
+        "available": false,
         "id": 2
     },
     {
         "name": "test3",
         "description": "test3",
-        "available": true,
+        "available": false,
         "id": 3
     },
     {
@@ -22,23 +22,5 @@
         "description": "test4",
         "available": true,
         "id": 4
-    },
-    {
-        "name": "test5",
-        "description": "test5",
-        "available": true,
-        "id": 5
-    },
-    {
-        "name": "test6",
-        "description": "test6",
-        "available": true,
-        "id": 6
-    },
-    {
-        "name": "test7",
-        "description": "test7",
-        "available": false,
-        "id": 7
     }
 ]

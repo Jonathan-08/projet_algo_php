@@ -10,6 +10,9 @@ class BookCollection extends Heap{
         
     }
 
+    /**
+     * transform une BookCollection en tableu
+     */
     public function toArray(): array {
         $booksArray = [];
         $current = $this->first;
@@ -22,6 +25,9 @@ class BookCollection extends Heap{
         return $booksArray;
     }
 
+    /**
+     * Récupère la longueur d'une BookCollection
+     */
     public function getLength(): int {
         $count = 0;
         $current = $this->first; 
@@ -34,24 +40,44 @@ class BookCollection extends Heap{
         return $count;
     }
 
-    // à revoir
-    public function remove(Book $bookToRemove): void {
-        $previous = null;
-        $current = $this->first;
-    
-        while ($current !== null) {
-            if ($current->value === $bookToRemove) {
-                if ($previous === null) {
-                    $this->first = $current->next;
-                } else {
-                    $previous->next = $current->next;
-                }
-                return;
+    /**
+     * Supprime un livre d'une BookCollection
+     */
+    public function remove($id) {
+        $bookToRemove = $this->findById($id);
+
+        if($this->first === null){
+            echo "La liste est vide";
+            return;
+        }
+
+        if($bookToRemove->value->id === $this->first->value->id){
+            $bookRemoved = $this->pop();
+            return $bookRemoved;
+        }
+
+        $beforeCurrent = $this->first;
+        $current = $beforeCurrent->next;
+        while($current !== null){
+            if($current->value->id === $bookToRemove->value->id){
+                $beforeCurrent->next = $current->next;
+                $bookRemoved = $current;
+                echo "HELLOOOOO";
+                $current = null;
+                return $bookRemoved;
             }
-            $previous = $current;
+
+            if($current->next === null){
+                $bookRemoved = $current;
+                $beforeCurrent->next = null;
+                return $bookRemoved;
+            }
+            $beforeCurrent = $current;
             $current = $current->next;
         }
     }
+
+    
     
     // à revoir
     public function findByKey(string $searchKey): LinkedListValue | null {
