@@ -42,7 +42,7 @@ function showMenu()
     Utils::fill($bookCollection, $filename);
     $choice = 0;
     while ($choice != -1) {
-        echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n-1/Quitter\n";
+        echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n5/Afficher un livre\n-1/Quitter\n";
         $choice = intval(readline());
         switch ($choice) {
             case 1:
@@ -86,6 +86,12 @@ function showMenu()
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
                 $bookCollection->showAllBooks();
+                break;
+            case 5:
+                echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
+                $bookId = intval(readline());
+                $book = $bookCollection->findById($bookId);
+                $bookCollection->showSingleBook($book);
                 break;
             case -1:
                 echo "Au revoir! ;)";
