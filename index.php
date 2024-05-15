@@ -8,6 +8,7 @@ use App\Algo\BookCollection;
 use App\Algo\Book;
 use App\Algo\Utils;
 
+
 function writeBooksToJson(array $livres, string $filename): void {
     $jsonData = json_encode($livres, JSON_PRETTY_PRINT);
     file_put_contents($filename, $jsonData);
@@ -79,6 +80,12 @@ function showMenu()
               
 
 
+                break;
+            case 5:
+                echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
+                $bookId = intval(readline());
+                $book = $bookCollection->findById($bookId);
+                $bookCollection->showSingleBook($book);
                 break;
             case 5:
                 echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
