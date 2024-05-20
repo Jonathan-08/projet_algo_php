@@ -11,7 +11,7 @@ class BookCollection extends Heap{
     }
 
     /**
-     * transform une BookCollection en tableu
+     * transforme une BookCollection en tableau
      */
     public function toArray(): array {
         $booksArray = [];
@@ -62,7 +62,6 @@ class BookCollection extends Heap{
             if($current->value->id === $bookToRemove->value->id){
                 $beforeCurrent->next = $current->next;
                 $bookRemoved = $current;
-                echo "HELLOOOOO";
                 $current = null;
                 return $bookRemoved;
             }
