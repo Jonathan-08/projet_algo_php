@@ -72,9 +72,15 @@ function showMenu()
                 echo "Vous avez choisi 'Supprimer un livre'\n";
                 echo "Entrez le nom, la description, la disponibilité ou l'identifiant du livre que vous souhaitez supprimer : ";
                 $searchKey = readline();
+
+                $bookId = $searchKey;
+                $book = $bookCollection->findById($bookId);
+                $bookName = $book->value->name;
+                
                 $bookCollection->remove($searchKey);
                 writeBooksToJson($bookCollection->toArray(), $filename);
-            $logger->logBookDeletion($filename);
+                
+                $logger->logBookDeletion($bookName);
                 break;
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
