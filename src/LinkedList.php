@@ -6,7 +6,7 @@ use App\Algo\LinkedListValue;
 
 class LinkedList
 {
-
+    public $nextId = 1;
     public $first;
 
 
