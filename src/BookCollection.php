@@ -115,9 +115,11 @@ class BookCollection extends Heap{
         return null;
     }
 
-    public function showSingleBook(LinkedListValue $bookValue): void{
+    public function showSingleBook(LinkedListValue $bookValue): string{
         $bookAvailable = $bookValue->value->available ? "Disponible" : "Indisponible";
         echo "Nom du livre: {$bookValue->value->name}\nDescription: {$bookValue->value->description}\nDisponibilité: $bookAvailable\n";
+        $bookName = $bookValue->value->name;
+        return $bookName;
     }
 
     /**

@@ -40,8 +40,6 @@ class Utils{
                 $fetchedBook["id"]);
                 $bookCollection->push($book);
             }
-        } else {
-            die("Le fichier: $filename est vide.");
-        }
+        } 
     }
 }
