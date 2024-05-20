@@ -150,4 +150,20 @@ class BookCollection extends Heap{
         echo "Nouvelle disponibilité: ";
         $bookValue->value->available = intval(readline());
     }
+
+    public function getLastId()
+    {
+        $current = $this->first;
+        $lastId = 0;
+
+        while($current !== null){
+            if($current->value->id > $lastId){
+                $lastId = $current->value->id;
+            }
+            $current = $current->next;
+        }
+
+        return $lastId;
+
+    }
 }
