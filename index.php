@@ -92,7 +92,7 @@ function showMenu()
                 echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
                 $bookId = intval(readline());
                 $book = $bookCollection->findById($bookId);
-
+                $bookCollection->showSingleBook($book);
                 $bookName = $book->value->name;
 
 
