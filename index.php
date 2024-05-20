@@ -40,7 +40,7 @@ function showMenu()
                 $bookDescription = readline();
                 echo "\nEntrez la disponibilité du livre (0 = indisponible 1 = disponible): ";
                 $bookAvailability = intval(readline());
-                $nextId = $bookCollection->getLength() + 1;
+                $nextId = $bookCollection->getLastId() + 1;
                 $book = new Book($bookName, $bookDescription, $bookAvailability, $nextId);
                 $bookCollection->push($book);
                 echo "Le livre $book->name a été ajouté avec succès.\n";
