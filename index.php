@@ -29,7 +29,7 @@ function showMenu()
 
     $choice = 0;
     while ($choice != -1) {
-        echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n5/Afficher un livre\n-1/Quitter\n";
+        echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n5/Afficher un livre\n6/Afficher les logs\n7/Trier les livres\n-1/Quitter\n";
         $choice = intval(readline());
         switch ($choice) {
             case 1:
@@ -98,6 +98,28 @@ function showMenu()
 
                 $logger->logSeeOneBooks($bookName);
                 break;
+            case 6:
+                echo "Vous avez choisi 'Afficher les logs'\n";
+                $logger->showLogs();
+                break;
+                case 7:
+                    echo "Vous pouvez trier les livres par : \n1/ Nom\n2/ Description\n3/ Disponibilité\n";
+                    $sortChoice = intval(readline());
+        
+                    if ($sortChoice === 1) {
+                        $bookCollection->sortBooks('name');
+                    } elseif ($sortChoice === 2) {
+                        $bookCollection->sortBooks('description');
+                    } elseif ($sortChoice === 3) {
+                        $bookCollection->sortBooks('available');
+                    } else {
+                        echo "Choix erroné. Entrez un chiffre parmis ceux proposés.\n";
+                    }
+        
+                    
+                    $bookCollection->showAllBooks();
+                    $logger->logSortBooks();
+                    break;
             case -1:
                 echo "Au revoir! ;)";
                 break;
