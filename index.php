@@ -10,7 +10,8 @@ use App\Algo\Utils;
 use App\Algo\Logger;
 
 
-function writeBooksToJson(array $livres, string $filename): void {
+function writeBooksToJson(array $livres, string $filename): void
+{
     $jsonData = json_encode($livres, JSON_PRETTY_PRINT);
     file_put_contents($filename, $jsonData);
 }
@@ -23,8 +24,8 @@ function showMenu()
     Utils::fill($bookCollection, $filename);
 
     //var_dump($bookCollection);
-  
-    $logFile = "data/log.csv"; 
+
+    $logFile = "data/log.csv";
     $logger = new Logger($logFile);
 
     $choice = 0;
@@ -40,10 +41,15 @@ function showMenu()
                 $bookDescription = readline();
                 echo "\nEntrez la disponibilité du livre (0 = indisponible 1 = disponible): ";
                 $bookAvailability = intval(readline());
-                $nextId = $bookCollection->getLastId() + 1;
+
+                // Générer un ID unique aléatoire
+                do {
+                    $nextId = random_int(1, 10000); // Vous pouvez ajuster la plage selon vos besoins
+                } while ($bookCollection->findById($nextId) !== null); // Assurez-vous que l'ID est unique
+
                 $book = new Book($bookName, $bookDescription, $bookAvailability, $nextId);
                 $bookCollection->push($book);
-                echo "Le livre $book->name a été ajouté avec succès.\n";
+                echo "Le livre $book->name a été ajouté avec succès avec l'ID $nextId.\n";
                 writeBooksToJson($bookCollection->toArray(), $filename);
 
                 $logger->logBookAddition($bookName);
@@ -61,7 +67,7 @@ function showMenu()
 
                 // recupérer le nom du livre modifié
                 $bookName = $bookToModif->value->name;
-                
+
 
 
                 $logger->logBookModification($bookName);
@@ -76,10 +82,10 @@ function showMenu()
                 $bookId = $searchKey;
                 $book = $bookCollection->findById($bookId);
                 $bookName = $book->value->name;
-                
+
                 $bookCollection->remove($searchKey);
                 writeBooksToJson($bookCollection->toArray(), $filename);
-                
+
                 $logger->logBookDeletion($bookName);
                 break;
             case 4:
@@ -102,32 +108,36 @@ function showMenu()
                 echo "Vous avez choisi 'Afficher les logs'\n";
                 $logger->showLogs();
                 break;
-                case 7:
-                    echo "Vous pouvez trier les livres par : \n1/ Nom\n2/ Description\n3/ Disponibilité\n";
-                    $sortChoice = intval(readline());
-        
-                    if ($sortChoice === 1) {
-                        $bookCollection->sortBooks('name');
-                    } elseif ($sortChoice === 2) {
-                        $bookCollection->sortBooks('description');
-                    } elseif ($sortChoice === 3) {
-                        $bookCollection->sortBooks('available');
-                    } else {
-                        echo "Choix erroné. Entrez un chiffre parmis ceux proposés.\n";
-                    }
-        
-                    
-                    $bookCollection->showAllBooks();
-                    $logger->logSortBooks();
-                    break;
+            case 7:
+                echo "Vous pouvez trier les livres par : \n1/ Nom\n2/ Description\n3/ Disponibilité\n";
+                $sortChoice = intval(readline());
+                echo "Choisissez l'ordre : \n1/ Croissant\n2/ Décroissant\n";
+                $orderChoice = intval(readline());
+                $ascending = ($orderChoice === 1);
+
+                if ($sortChoice === 1) {
+                    $bookCollection->sortBooks('name', $ascending);
+                } elseif ($sortChoice === 2) {
+                    $bookCollection->sortBooks('description', $ascending);
+                } elseif ($sortChoice === 3) {
+                    $bookCollection->sortBooks('available', $ascending);
+                } else {
+                    echo "Choix erroné. Entrez un chiffre parmi ceux proposés.\n";
+                }
+
+                // Afficher les livres triés
+                $bookCollection->showAllBooks();
+
+                $logger->logSortBooks();
+                break;
             case -1:
                 echo "Au revoir! ;)";
                 break;
             default:
                 echo "Choix erroné. Entrez un chiffre parmis ceux proposés.\n";
                 break;
-                }
         }
+    }
 }
 
 showMenu();
