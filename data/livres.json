@@ -4,5 +4,11 @@
         "description": "un",
         "available": true,
         "id": 1
+    },
+    {
+        "name": "Deux",
+        "description": "deux",
+        "available": true,
+        "id": 2
     }
 ]

@@ -166,4 +166,75 @@ class BookCollection extends Heap{
         return $lastId;
 
     }
+    public function mergeSort($head, $property, $ascending = true) {
+        if ($head === null || $head->next === null) {
+            return $head;
+        }
+
+        $middle = $this->getMiddle($head);
+        $nextOfMiddle = $middle->next;
+        $middle->next = null;
+
+        $left = $this->mergeSort($head, $property, $ascending);
+        $right = $this->mergeSort($nextOfMiddle, $property, $ascending);
+
+        $sortedList = $this->sortedMerge($left, $right, $property, $ascending);
+
+        return $sortedList;
+    }
+
+    public function getMiddle($head) {
+        if ($head === null) {
+            return $head;
+        }
+
+        $slow = $head;
+        $fast = $head->next;
+
+        while ($fast !== null) {
+            $fast = $fast->next;
+            if ($fast !== null) {
+                $slow = $slow->next;
+                $fast = $fast->next;
+            }
+        }
+
+        return $slow;
+    }
+
+    public function sortedMerge($a, $b, $property, $ascending) {
+        if ($a === null) {
+            return $b;
+        }
+        if ($b === null) {
+            return $a;
+        }
+
+        $result = null;
+        $comparison = $this->compare($a->value, $b->value, $property);
+        if ($ascending ? $comparison <= 0 : $comparison > 0) {
+            $result = $a;
+            $result->next = $this->sortedMerge($a->next, $b, $property, $ascending);
+        } else {
+            $result = $b;
+            $result->next = $this->sortedMerge($a, $b->next, $property, $ascending);
+        }
+
+        return $result;
+    }
+
+    public function compare($a, $b, $property) {
+        if ($property == 'name') {
+            return strcmp($a->name, $b->name);
+        } elseif ($property == 'description') {
+            return strcmp($a->description, $b->description);
+        } elseif ($property == 'available') {
+            return $a->available - $b->available;
+        }
+        return 0;
+    }
+
+    public function sortBooks($property, $ascending = true) {
+        $this->first = $this->mergeSort($this->first, $property, $ascending);
+    }
 }
