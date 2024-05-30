@@ -6,9 +6,9 @@ class Book{
     public string $name;
     public string $description;
     public bool $available;
-    public int $id;
+    public string $id;
 
-    public function __construct($name, $description, $available, $id = 0)
+    public function __construct($name, $description, $available, $id = "")
     {
         $this->name = $name;
         $this->description = $description;
