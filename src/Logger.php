@@ -33,12 +33,17 @@ class Logger {
         $this->log("Affichage d'un livre : $bookName");
         
     }
+
     public function logSortBooks() {
         $this->log("Tri des livres");
     }
 
     public function showLogs() {
         echo file_get_contents($this->logFile);
+    }
+    public function logSearchBook($bookName, $success) {
+        $result = $success === true ? 'succès' : 'échec';
+        $this->log("Recherche du livre : $bookName => $result.");
     }
     
 }

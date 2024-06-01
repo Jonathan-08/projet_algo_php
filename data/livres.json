@@ -24,9 +24,9 @@
         "id": "66575d93c2a5c"
     },
     {
-        "name": "test2",
-        "description": "test2",
-        "available": false,
+        "name": "TEST2",
+        "description": "TEST2",
+        "available": true,
         "id": "66575d9a56fa2"
     },
     {

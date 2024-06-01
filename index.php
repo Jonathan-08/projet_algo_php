@@ -52,7 +52,8 @@ function showMenu()
                 break;
             case 2:
                 echo "Vous avez choisi 'Modifier un livre'\n";
-                $bookToModif = $bookCollection->binarySearch();
+                $searchBook = $bookCollection->binarySearch();
+                $bookToModif = $searchBook["book"];
                 if($bookToModif){
                     $bookName = $bookCollection->showSingleBook($bookToModif);
                     $bookCollection->modifBook($bookToModif);
@@ -67,7 +68,8 @@ function showMenu()
             case 3:
                 echo "Vous avez choisi 'Supprimer un livre'\n";
                 
-                $bookToRemove = $bookCollection->binarySearch();
+                $searchBook = $bookCollection->binarySearch();
+                $bookToRemove = $searchBook["book"];
                 if($bookToRemove){
                     $removed = $bookCollection->remove($bookToRemove);
                     writeBooksToJson($bookCollection->toArray(), $filename);
@@ -85,7 +87,8 @@ function showMenu()
                 break;
             case 5:
                 echo "Vous avez choisi 'Afficher un livre:'\n";
-                $book = $bookCollection->binarySearch();
+                $searchBook = $bookCollection->binarySearch();
+                $book = $searchBook["book"];
                 if($book){
                     $bookName = $bookCollection->showSingleBook($book);
                     $logger->logSeeOneBooks($bookName);
@@ -94,12 +97,16 @@ function showMenu()
                 }
                 break;
             case 6:
-                $found = $bookCollection->binarySearch();
+                echo "Vous avez choisi 'Chercher un livre'\n";
+                $searchBook = $bookCollection->binarySearch();
+                $found = $searchBook["book"];
+                $searchedName = $searchBook["bookName"];
                 if($found){
-                    $bookCollection->showSingleBook($found);
-                    var_dump($found);
+                    $bookName = $bookCollection->showSingleBook($found);
+                    $logger->logSearchBook($bookName, true);
                 } else {
                     echo "Livre introuvable.\n";
+                    $logger->logSearchBook($searchedName, $found);
                 };
                 break;
             case 6:

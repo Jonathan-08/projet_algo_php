@@ -323,13 +323,16 @@ class BookCollection extends Heap{
 
     /**
      * Fonction point d'entrée qui appelle la fonction de recherche binaire
-     * @return LinkedListvalue
+     * @return array
      */
-    public function binarySearch(): LinkedListValue | bool{
+    public function binarySearch(): array{
         $column = $this->columnAsker();
         $this->sort($column);
         $target = $this->valueAsker($column);
-        return $this->binarySearchHelper($this->first, null, $column, $target);
+        return [
+            "book" => $this->binarySearchHelper($this->first, null, $column, $target),
+            "bookName" => $target
+        ];
     }
 
     /**
