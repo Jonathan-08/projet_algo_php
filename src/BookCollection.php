@@ -209,8 +209,12 @@ class BookCollection extends Heap{
         while ($fast !== null) {
             $fast = $fast->next;
             if ($fast !== null) {
+                $slow = $slow->next;
+                $fast = $fast->next;
             }
         }
+
+        return $slow;
     }
 
     
@@ -383,7 +387,7 @@ class BookCollection extends Heap{
 
         return $slow;
     }
-    
+
     /**
      * Demande sur quelle colonne la recherche sera effectué
      */
