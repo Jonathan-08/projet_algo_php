@@ -30,7 +30,8 @@ function showMenu()
 
     $choice = 0;
     while ($choice != -1) {
-        echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n5/Afficher un livre\n6/Afficher les logs\n7/Trier les livres\n-1/Quitter\n";
+        echo "Que voulez vous faire?\n\n1/Ajouter un livre\n2/Modifier un livre\n3/Supprimer un livre\n4/Afficher les livres\n5/Afficher un livre\n6/Afficher les logs\n7/Trier les livres\n8/Rechercher un livre\n-1/Quitter\n";
+
         $choice = intval(readline());
         switch ($choice) {
             case 1:
@@ -41,12 +42,7 @@ function showMenu()
                 $bookDescription = readline();
                 echo "\nEntrez la disponibilité du livre (0 = indisponible 1 = disponible): ";
                 $bookAvailability = intval(readline());
-
-                // Générer un ID unique aléatoire
-                do {
-                    $nextId = random_int(1, 10000); // Vous pouvez ajuster la plage selon vos besoins
-                } while ($bookCollection->findById($nextId) !== null); // Assurez-vous que l'ID est unique
-
+                $nextId = uniqid();
                 $book = new Book($bookName, $bookDescription, $bookAvailability, $nextId);
                 $bookCollection->push($book);
                 echo "Le livre $book->name a été ajouté avec succès avec l'ID $nextId.\n";
@@ -57,36 +53,33 @@ function showMenu()
                 break;
             case 2:
                 echo "Vous avez choisi 'Modifier un livre'\n";
-                echo "Entrez l'identifiant du livre à modifier: ";
-                $bookID = intval(readline());
-                $bookToModif = $bookCollection->findById($bookID);
-                $bookCollection->showSingleBook($bookToModif);
-                $bookCollection->modifBook($bookToModif);
-                writeBooksToJson($bookCollection->toArray(), $filename);
-
-
-                // recupérer le nom du livre modifié
-                $bookName = $bookToModif->value->name;
-
-
-
-                $logger->logBookModification($bookName);
-
+                $searchBook = $bookCollection->binarySearch();
+                $bookToModif = $searchBook["book"];
+                if($bookToModif){
+                    $bookName = $bookCollection->showSingleBook($bookToModif);
+                    $bookCollection->modifBook($bookToModif);
+                    writeBooksToJson($bookCollection->toArray(), $filename);
+                    // recupérer le nom du livre modifié
+                    
+                    $logger->logBookModification($bookName);
+                } else {
+                    echo "Livre introuvable.\n";
+                };
                 break;
             case 3:
-
                 echo "Vous avez choisi 'Supprimer un livre'\n";
-                echo "Entrez le nom, la description, la disponibilité ou l'identifiant du livre que vous souhaitez supprimer : ";
-                $searchKey = readline();
+                
+                $searchBook = $bookCollection->binarySearch();
+                $bookToRemove = $searchBook["book"];
 
-                $bookId = $searchKey;
-                $book = $bookCollection->findById($bookId);
-                $bookName = $book->value->name;
-
-                $bookCollection->remove($searchKey);
-                writeBooksToJson($bookCollection->toArray(), $filename);
-
-                $logger->logBookDeletion($bookName);
+                if($bookToRemove){
+                    $removed = $bookCollection->remove($bookToRemove);
+                    writeBooksToJson($bookCollection->toArray(), $filename);
+                    $bookName = $removed->value->name;
+                    echo "Le livre $bookName a bien été supprimé.\n";
+                    $logger->logBookDeletion($bookName);
+                }
+                
                 break;
             case 4:
                 echo "Vous avez choisi 'Afficher les livres'\n";
@@ -95,15 +88,19 @@ function showMenu()
                 $logger->logSeeBooks();
                 break;
             case 5:
-                echo "Vous avez choisi 'Afficher un livre:'\nEntrez l'id du livre à afficher: ";
-                $bookId = intval(readline());
-                $book = $bookCollection->findById($bookId);
-                $bookCollection->showSingleBook($book);
-                $bookName = $book->value->name;
+                echo "Vous avez choisi 'Afficher un livre:'\n";
 
+                $searchBook = $bookCollection->binarySearch();
+                $book = $searchBook["book"];
 
-                $logger->logSeeOneBooks($bookName);
+                if($book){
+                    $bookName = $bookCollection->showSingleBook($book);
+                    $logger->logSeeOneBooks($bookName);
+                }else{
+                    echo "Livre introuvable.\n";
+                }
                 break;
+            
             case 6:
                 echo "Vous avez choisi 'Afficher les logs'\n";
                 $logger->showLogs();
@@ -129,6 +126,19 @@ function showMenu()
                 $bookCollection->showAllBooks();
 
                 $logger->logSortBooks();
+                break;
+            case 8:
+                echo "Vous avez choisi 'Chercher un livre'\n";
+                $searchBook = $bookCollection->binarySearch();
+                $found = $searchBook["book"];
+                $searchedName = $searchBook["bookName"];
+                if($found){
+                    $bookName = $bookCollection->showSingleBook($found);
+                    $logger->logSearchBook($bookName, true);
+                } else {
+                    echo "Livre introuvable.\n";
+                    $logger->logSearchBook($searchedName, $found);
+                };
                 break;
             case -1:
                 echo "Au revoir! ;)";
