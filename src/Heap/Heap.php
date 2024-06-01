@@ -6,8 +6,8 @@ use App\Algo\LinkedList;
 use App\Algo\Book;
 use App\Algo\LinkedListValue;
 
-class Heap extends LinkedList{
-
+class Heap extends LinkedList
+{
     public function pop(): mixed
     {
         if ($this->first === null) {

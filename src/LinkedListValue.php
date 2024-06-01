@@ -3,6 +3,7 @@
 namespace App\Algo;
 
 use App\Algo\Book;
+
 class LinkedListValue
 {
     public Book $value;

@@ -4,25 +4,26 @@ namespace App\Algo;
 
 use App\Algo\Heap\Heap;
 
-class BookCollection extends Heap{
+class BookCollection extends Heap
+{
     public function __construct()
     {
-        
     }
 
     /**
      * transforme une BookCollection en tableau
      * @return array
      */
-    public function toArray(): array {
+    public function toArray(): array
+    {
         $booksArray = [];
         $current = $this->first;
-    
+
         while ($current !== null) {
             $booksArray[] = $current->value;
             $current = $current->next;
         }
-    
+
         return $booksArray;
     }
 
@@ -30,15 +31,16 @@ class BookCollection extends Heap{
      * Récupère la longueur d'une BookCollection
      * @return int
      */
-    public function getLength(): int {
+    public function getLength(): int
+    {
         $count = 0;
-        $current = $this->first; 
-    
+        $current = $this->first;
+
         while ($current !== null) {
             $count++;
             $current = $current->next;
         }
-    
+
         return $count;
     }
 
@@ -46,29 +48,30 @@ class BookCollection extends Heap{
      * Supprime un livre d'une BookCollection
      * @return ?LinkedListValue
      */
-    public function remove(LinkedListValue $bookToRemove): LinkedListValue | null {
+    public function remove(LinkedListValue $bookToRemove): LinkedListValue | null
+    {
 
-        if($this->first === null){
+        if ($this->first === null) {
             echo "La liste est vide";
             return null;
         }
 
-        if($bookToRemove->value->id === $this->first->value->id){
+        if ($bookToRemove->value->id === $this->first->value->id) {
             $bookRemoved = $this->pop();
             return $bookRemoved;
         }
 
         $beforeCurrent = $this->first;
         $current = $beforeCurrent->next;
-        while($current !== null){
-            if($current->value->id === $bookToRemove->value->id){
+        while ($current !== null) {
+            if ($current->value->id === $bookToRemove->value->id) {
                 $beforeCurrent->next = $current->next;
                 $bookRemoved = $current;
                 $current = null;
                 return $bookRemoved;
             }
 
-            if($current->next === null){
+            if ($current->next === null) {
                 $bookRemoved = $current;
                 $beforeCurrent->next = null;
                 return $bookRemoved;
@@ -83,7 +86,8 @@ class BookCollection extends Heap{
      * @param LinkedListValue
      * @return LinkedListValue
      */
-    public function showSingleBook(LinkedListValue $bookValue): string{
+    public function showSingleBook(LinkedListValue $bookValue): string
+    {
         $bookAvailable = $bookValue->value->available ? "Disponible" : "Indisponible";
         echo "Nom du livre: {$bookValue->value->name}\nDescription: {$bookValue->value->description}\nDisponibilité: $bookAvailable\n";
         $bookName = $bookValue->value->name;
@@ -94,14 +98,15 @@ class BookCollection extends Heap{
      * Affiche tout les livres de la bibliothèque
      * @return void
      */
-    public function showAllBooks(): void{
+    public function showAllBooks(): void
+    {
         $current = $this->first;
 
-        if($this->first === null){
+        if ($this->first === null) {
             echo "La bibliothèque est vide\n";
         }
 
-        while($current !== null){
+        while ($current !== null) {
             $bookAvailable = $current->value->available ? "Disponible" : "Indisponible";
             echo "Nom du livre: {$current->value->name}\nDescription: {$current->value->description}\nDisponibilité: {$bookAvailable}\n\n";
             $current = $current->next;
@@ -113,7 +118,8 @@ class BookCollection extends Heap{
      * @param LinkedListValue
      * @return void
      */
-    public function modifBook(LinkedListValue $bookValue): void{
+    public function modifBook(LinkedListValue $bookValue): void
+    {
         echo "Nouveau nom: ";
         $bookValue->value->name = readline();
         echo "Nouvelle description : ";
@@ -122,7 +128,11 @@ class BookCollection extends Heap{
         $bookValue->value->available = intval(readline());
     }
 
-    public function mergeSort($head, $property, $ascending = true) {
+    /**
+     * mergeSort sera la fonction d'entrée pour le tri fusion
+     */
+    public function mergeSort($head, $property, $ascending = true)
+    {
         if ($head === null || $head->next === null) {
             return $head;
         }
@@ -139,7 +149,11 @@ class BookCollection extends Heap{
         return $sortedList;
     }
 
-    public function getMiddleMerge($head) {
+    /**
+     * Fonction qui retourne le milieu d'une liste chainée
+     */
+    public function getMiddleMerge($head)
+    {
         if ($head === null) {
             return $head;
         }
@@ -158,9 +172,13 @@ class BookCollection extends Heap{
         return $slow;
     }
 
-    
 
-    public function sortedMerge($a, $b, $property, $ascending) {
+    /**
+     * Fonction qui fusionne deux listes triées
+     */
+
+    public function sortedMerge($a, $b, $property, $ascending)
+    {
         if ($a === null) {
             return $b;
         }
@@ -181,7 +199,11 @@ class BookCollection extends Heap{
         return $result;
     }
 
-    public function compare($a, $b, $property) {
+    /**
+     * Fonction qui compare deux livres en fonction d'une propriété
+     */
+    public function compare($a, $b, $property)
+    {
         if ($property == 'name') {
             return strcmp($a->name, $b->name);
         } elseif ($property == 'description') {
@@ -192,21 +214,28 @@ class BookCollection extends Heap{
         return 0;
     }
 
-    public function sortBooks($property, $ascending = true) {
+    /**
+     * Fonction point d'entrée qui appelle la fonction de tri fusion
+     */
+
+    public function sortBooks($property, $ascending = true)
+    {
         $this->first = $this->mergeSort($this->first, $property, $ascending);
     }
 
     /**
      * Fonction en point d'entrée qui appelle la fonction de tri
      */
-    public function sort($column) {
+    public function sort($column)
+    {
         $this->first = $this->quickSort($this->first, $column);
     }
 
     /**
      * Fonction qui implémente le tri rapide
      */
-    private function quickSort($first, $column) {
+    private function quickSort($first, $column)
+    {
         if ($first === null || $first->next === null) {
             return $first;
         }
@@ -222,7 +251,8 @@ class BookCollection extends Heap{
     /**
      * Fonction qui permet de séparer une liste en deux parties par rapport à son pivot
      */
-    private function partition($first, $column) {
+    private function partition($first, $column)
+    {
         $pivot = $first;
         $left = null;
         $right = null;
@@ -250,7 +280,8 @@ class BookCollection extends Heap{
     /**
      * rassemble toutes les parties de la liste
      */
-    private function concatenate($left, $pivot, $right) {
+    private function concatenate($left, $pivot, $right)
+    {
         if ($left === null) {
             $pivot->next = $right;
             return $pivot;
@@ -270,7 +301,8 @@ class BookCollection extends Heap{
      * Fonction point d'entrée qui appelle la fonction de recherche binaire
      * @return array
      */
-    public function binarySearch(): array{
+    public function binarySearch(): array
+    {
         $column = $this->columnAsker();
         $this->sort($column);
         $target = $this->valueAsker($column);
@@ -283,7 +315,8 @@ class BookCollection extends Heap{
     /**
      * Fonction qui implémente la recherche binaire
      */
-    private function binarySearchHelper($start, $end, $column, $target): LinkedListValue | bool{
+    private function binarySearchHelper($start, $end, $column, $target): LinkedListValue | bool
+    {
         if ($start === null) {
             return false;
         }
@@ -307,7 +340,8 @@ class BookCollection extends Heap{
      * Retourne le milieu d'une liste chainée
      * @return ?LinkedListValue
      */
-    private function getMiddle($start, $end): LinkedListValue | null{
+    private function getMiddle($start, $end): LinkedListValue | null
+    {
         if ($start === null) {
             return null;
         }
@@ -316,7 +350,7 @@ class BookCollection extends Heap{
         $fast = $start->next;
 
         while ($fast !== $end) {
-            if($fast === null){
+            if ($fast === null) {
                 return null;
             }
             $fast = $fast->next;
@@ -332,10 +366,11 @@ class BookCollection extends Heap{
     /**
      * Demande sur quelle colonne la recherche sera effectué
      */
-    public function columnAsker(){
+    public function columnAsker()
+    {
         $choice = 0;
         $choices = [1, 2, 3, 4];
-        while(!in_array($choice, $choices)){
+        while (!in_array($choice, $choices)) {
             echo "Sur quelle colonne voulez-vous faire votre recherche?\n";
             echo "1/Nom\n2/Description\n3/Disponibilité\n4/Identifiant\n";
             $choice = intval(readline());
@@ -357,13 +392,14 @@ class BookCollection extends Heap{
                     echo "Veuillez choisir parmis les options proposés\n";
                     break;
             }
-        } 
+        }
     }
 
     /**
      * Formule la bonne question en fonction de la colonne renseignée
      */
-    public function valueAsker($column){
+    public function valueAsker($column)
+    {
         switch ($column) {
             case 'name':
                 echo "Entrez le nom du livre recherché: ";

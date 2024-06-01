@@ -42,13 +42,31 @@ recherche) doit être tenu afin de pouvoir les consulter si besoin par l’utili
 code, respect des bonnes pratiques de codage en PHP.
 
 ### Exemple d’utilisation
+
+Penser à utiliser composer pour installer les dépendances.
+
 ```shell
 php index.php
 ```
 ```shell
+Que voulez vous faire?
+
 1/Ajouter un livre
 2/Modifier un livre
 3/Supprimer un livre
 4/Afficher les livres
+5/Afficher un livre
+6/Afficher les logs
+7/Trier les livres
+8/Rechercher un livre
 -1/Quitter
+
 ```
+
+Les livres sont stockés dans un fichier livres.json.
+
+Apres chaque action on veut constater l'historique des actions effectuées dans logs.csv.
+
+### Contributeurs
+- [ASSI Marc]() 3IW2
+- [PERROUAS Thibault]() 3IW2
