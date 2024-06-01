@@ -2,7 +2,8 @@
 
 namespace App\Algo;
 
-class Book{
+class Book
+{
     public string $name;
     public string $description;
     public bool $available;
@@ -16,9 +17,8 @@ class Book{
         $this->id = $id;
     }
 
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
-
 }
