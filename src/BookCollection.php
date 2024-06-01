@@ -78,45 +78,6 @@ class BookCollection extends Heap{
         }
     }
 
-    
-    
-    // à revoir
-    public function findByKey(string $searchKey): LinkedListValue | null {
-        $current = $this->first;
-    
-        while ($current !== null) {
-            if ($current->value->name === $searchKey ||
-                $current->value->description === $searchKey ||
-                $current->value->id == $searchKey ||
-                $current->value->available == $searchKey) {
-                return $current;
-            }
-            $current = $current->next;
-        }
-    
-        echo "l'élément n'a pas été trouvé";
-        return null;
-    }
-
-    /**
-     * Trouve un livre en fonction de son Id.
-     * Retourne null si l'id n'est pas trouvé
-     * @return ?LinkedListValue
-     */
-    public function findById(int $id): LinkedListValue | null{
-        $current = $this->first;
-
-        while($current !== null){
-            if($current->value->id === $id){
-                return $current;
-            }
-            $current = $current->next;
-        }
-
-        echo "l'élément n'a pas été retrouvé.";
-        return null;
-    }
-
     /**
      * Affiche un Book et retourne son nom
      * @param LinkedListValue
@@ -159,26 +120,6 @@ class BookCollection extends Heap{
         $bookValue->value->description = readline();
         echo "Nouvelle disponibilité (1 disponible , 0 indisponible) : ";
         $bookValue->value->available = intval(readline());
-    }
-
-    /**
-     * Retourne l'id du dernier élément
-     * @return int
-     */
-    public function getLastId(): int
-    {
-        $current = $this->first;
-        $lastId = 0;
-
-        while($current !== null){
-            if($current->value->id > $lastId){
-                $lastId = $current->value->id;
-            }
-            $current = $current->next;
-        }
-
-        return $lastId;
-
     }
 
     public function mergeSort($head, $property, $ascending = true) {
