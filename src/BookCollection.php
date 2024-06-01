@@ -155,9 +155,9 @@ class BookCollection extends Heap{
     public function modifBook(LinkedListValue $bookValue): void{
         echo "Nouveau nom: ";
         $bookValue->value->name = readline();
-        echo "Nouvelle description nom: ";
+        echo "Nouvelle description : ";
         $bookValue->value->description = readline();
-        echo "Nouvelle disponibilité: ";
+        echo "Nouvelle disponibilité (1 disponible , 0 indisponible) : ";
         $bookValue->value->available = intval(readline());
     }
 
