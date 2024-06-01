@@ -19,8 +19,8 @@ class Logger {
         $this->log("Ajout d'un livre : $bookName ". "le :". date('l jS \of F Y h:i:s A'));
     }
 
-    public function logBookModification($bookName) {
-        $this->log("Modification du livre : $bookName");
+    public function logBookModification($oldBookName, $newBookName) {
+        $this->log("Modification du livre $oldBookName en $newBookName");
     }
 
     public function logBookDeletion($bookName) {

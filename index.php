@@ -55,13 +55,14 @@ function showMenu()
                 echo "Vous avez choisi 'Modifier un livre'\n";
                 $searchBook = $bookCollection->binarySearch();
                 $bookToModif = $searchBook["book"];
+                $oldBookName = $searchBook["bookName"];
                 if($bookToModif){
                     $bookName = $bookCollection->showSingleBook($bookToModif);
                     $bookCollection->modifBook($bookToModif);
                     writeBooksToJson($bookCollection->toArray(), $filename);
                     // recupérer le nom du livre modifié
                     
-                    $logger->logBookModification($bookName);
+                    $logger->logBookModification($oldBookName, $bookName);
                 } else {
                     echo "Livre introuvable.\n";
                 };
